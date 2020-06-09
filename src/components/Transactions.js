@@ -8,7 +8,7 @@ class Transactions extends Component {
             <div id="transactions-container">
              {
                     transactions.map ( e => 
-                        {return <Transaction deleteTrans={this.props.deleteTrans} id={e.key} key={e.key} amount={e.amount} vendor={e.vendor} category={e.category}/>}
+                        {return <Transaction deleteTrans={this.props.deleteTrans} id={e["_id"]} key={e["_id"]} amount={e.amount} vendor={e.vendor} category={e.category}/>}
                     )
              }
             </div>

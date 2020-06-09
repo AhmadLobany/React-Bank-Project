@@ -12,16 +12,16 @@ class Operations extends Component {
     }
 
     deposit = () => {
-        this.props.deposit(this.state.amount,this.state.vendor,this.state.Category)
+        this.props.deposit(parseInt(this.state.amount),this.state.vendor,this.state.Category)
     }
 
     withraw = () => {
-        this.props.withdraw(this.state.amount,this.state.vendor,this.state.Category)
+        this.props.withdraw(parseInt(this.state.amount),this.state.vendor,this.state.Category)
     }
 
     updateAmount = (event) => {
         this.setState({
-          amount:  parseInt(event.target.value)
+          amount:  event.target.value
         })
       }
 
