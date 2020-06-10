@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
-// import { BrowserRouter as Router, Route,Link} from 'react-router-dom'
+import { BrowserRouter as Router, Route,Link} from 'react-router-dom'
 import Transactions from './components/Transactions'
 import Operations from './components/Operations'
 import './App.css';
 const axios = require('axios');
 
 
-class App extends Component {
 
+
+
+
+class App extends Component {
+  
   constructor() {
     super()
     this.state = {
       data : []
     }
   }
+
 
   async getData() {
     return axios.get("http://localhost:4000/transactions")
@@ -45,7 +50,33 @@ class App extends Component {
     // const data = await this.getData()
     // this.setState ({transCounter: oldTransCount + 1})
     const response = await this.getData()
-    this.setState({ data: response.data.data})
+    await this.setState({ data: response.data.data})
+    // browserHistory.push('/transactions');
+    // this.props.history.push("/transactions");
+  }
+
+  breakdown = () => {
+    let categories = {}
+    const sortedByCategory = []
+    const arr = this.state.data
+    for(let e of arr) {
+      if(!categories[e.category]) {categories[e.category] = e.amount
+      } else {
+        categories[e.category] = categories[e.category] + e.amount
+      }
+    } 
+    for(let category of Object.keys(categories)) {
+      sortedByCategory.push({category,amount: categories[category]})
+    }
+    return (
+      <div id="breakdown-container">
+       {
+              sortedByCategory.map ( e => 
+              {return <div key={e.category+e.amount}>{e.category}  {e.amount}</div>}
+              )
+       }
+      </div>
+    )
   }
 
   deleteTrans = async (key)  => {
@@ -67,11 +98,22 @@ class App extends Component {
 
   render() {
   return (
-    <div className="App">
+    <Router> 
+    <div className="App"><div id="home-background"></div><div id="main-links">
+        {<Link to="/transactions">Transactions</Link>}
+        {<Link to="/">Operations</Link>}
+        {<Link to="/breakdown">Breakdown</Link>}
+      </div>
       <div>Balance:  {this.calcuateBalance()}$</div>
-      <Operations withdraw={this.withdraw} deposit={this.deposit}/>
-      <Transactions deleteTrans={this.deleteTrans} data={this.state.data}/>
-    </div>
+      {<Route path="/" exact render={() => <Operations withdraw={this.withdraw} deposit={this.deposit}/>}/>}
+      {<Route path="/transactions" render={() => <Transactions deleteTrans={this.deleteTrans} data={this.state.data}/>}/>}
+      {<Route path="/breakdown" render={() =>this.breakdown()}/>}
+    </div></Router>
+    // <div className="App">
+    //   <div>Balance:  {this.calcuateBalance()}$</div>
+    //   <Operations withdraw={this.withdraw} deposit={this.deposit}/>
+    //   <Transactions deleteTrans={this.deleteTrans} data={this.state.data}/>
+    // </div>
   );}
 
 }

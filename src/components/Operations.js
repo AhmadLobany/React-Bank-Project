@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from "react-router-dom";
 
 class Operations extends Component {
 
@@ -12,11 +13,19 @@ class Operations extends Component {
     }
 
     deposit = () => {
+      if(this.state.amount) {
         this.props.deposit(parseInt(this.state.amount),this.state.vendor,this.state.Category)
+        this.props.history.push("/transactions");
+      }
     }
 
     withraw = () => {
+      if(this.state.amount) {
         this.props.withdraw(parseInt(this.state.amount),this.state.vendor,this.state.Category)
+        this.props.history.push("/transactions");
+      }
+
+        
     }
 
     updateAmount = (event) => {
@@ -45,9 +54,10 @@ class Operations extends Component {
                 <input placeholder="Category" value={this.state.Category} onChange={this.updateCategory}></input>
                 <button onClick={this.deposit}>Deposit</button>
                 <button onClick={this.withraw}>Withdraw</button>
+
             </div>
         )
     }
 }
 
-export default Operations;
+export default withRouter(Operations);
