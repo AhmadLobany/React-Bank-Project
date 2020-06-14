@@ -9,12 +9,14 @@ class Transaction extends Component {
 
     render() {
         return (
-            <div id="transaction-container">
-                <span> {this.props.amount} </span>  
-                <span>{this.props.vendor} </span>
-                <span>{this.props.category}</span>
-                <button onClick={this.deleteTrans}>Delete</button>
-            </div>
+            <tbody>
+            <tr id="transaction-container">
+                <td  className={this.props.amount>=0 ? "pos" : "neg"}> {this.props.amount} </td>  
+                <td>{this.props.vendor} </td>
+                <td>{this.props.category}</td>
+                <td><button onClick={this.deleteTrans}>Delete</button></td>
+            </tr>
+            </tbody>
         )
     }
 }

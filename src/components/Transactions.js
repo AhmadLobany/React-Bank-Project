@@ -5,13 +5,22 @@ class Transactions extends Component {
     render() {
         const transactions = this.props.data;
         return (
-            <div id="transactions-container">
+                <table id="transactions-container">
+                    <tbody>
+                    <tr>
+                        <th>Amount</th>
+                        <th>Vendor</th>
+                        <th>Category</th>
+                        <th>Delete</th>
+                    </tr>
+                    </tbody>
+
              {
                     transactions.map ( e => 
                         {return <Transaction deleteTrans={this.props.deleteTrans} id={e["_id"]} key={e["_id"]} amount={e.amount} vendor={e.vendor} category={e.category}/>}
                     )
              }
-            </div>
+                </table>
         )
     }
 }
