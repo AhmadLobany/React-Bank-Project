@@ -16,7 +16,7 @@ class App extends Component {
   }
 
   async getData() {
-    return axios.get("http://localhost:4000/transactions")
+    return axios.get("/transactions")
   }
 
   async componentDidMount() {
@@ -35,13 +35,13 @@ class App extends Component {
   }
 
   deposit =  async (amount,vendor,category) => {
-    await axios.post("http://localhost:4000/transaction",{amount,category,vendor})
+    await axios.post("/transaction",{amount,category,vendor})
     const response = await this.getData()
     await this.setState({ data: response.data.data})
   }
 
   withdraw = async (amount,vendor,category) => {
-    await axios.post("http://localhost:4000/transaction",{amount : -amount,category,vendor})
+    await axios.post("/transaction",{amount : -amount,category,vendor})
     const response = await this.getData()
     await this.setState({ data: response.data.data})
   }
@@ -64,7 +64,7 @@ class App extends Component {
 
 
   deleteTrans = async (key)  => {
-    await axios.delete(`http://localhost:4000/transaction/${key}`)
+    await axios.delete(`/transaction/${key}`)
     const response = await this.getData()
     this.setState({ data: response.data.data})
   }

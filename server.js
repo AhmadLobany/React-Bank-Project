@@ -2,7 +2,10 @@ const express = require('express')
 const app = express()
 const path = require('path')
 const bodyParser = require('body-parser')
+app.use(express.static(path.join(__dirname, 'build')));
 const api = require('./server/routes/api')
+
+
 
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*')
@@ -14,16 +17,18 @@ app.use(function (req, res, next) {
 
 
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/bank', { useNewUrlParser: true ,useUnifiedTopology: true})
-// app.use(express.static(path.join(__dirname, 'node_modules')))
-// app.use(express.static(path.join(__dirname, 'dist')))
+mongoose.connect(process.env.MONGODB_URI|| 'mongodb://localhost/bank', { useNewUrlParser: true ,useUnifiedTopology: true})
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use('/', api)
 
 
+app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
+
+
 const port = 4000
-app.listen(port , function () {
-    console.log(`Running on port ${port}`)
-})
+app.listen(process.env.PORT || port)
