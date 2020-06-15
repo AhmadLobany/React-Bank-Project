@@ -3,14 +3,8 @@ import { BrowserRouter as Router, Route,Link} from 'react-router-dom'
 import Transactions from './components/Transactions'
 import Operations from './components/Operations'
 import Breakdown from './components/Breakdown'
-
 import './App.css';
 const axios = require('axios');
-
-
-
-
-
 
 class App extends Component {
   
@@ -20,7 +14,6 @@ class App extends Component {
       data : []
     }
   }
-
 
   async getData() {
     return axios.get("http://localhost:4000/transactions")

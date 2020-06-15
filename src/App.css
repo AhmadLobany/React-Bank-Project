@@ -55,6 +55,38 @@ div.content {
   color: darkgreen;
 }
 
+.button {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  margin-left: 15%;
+}
+
+.button:hover {background-color: #3e8e41}
+
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.in {
+  display: block;
+  font-size:11px;
+  padding:10px 2px;
+  border:solid 1px #aacfe4;
+  width:70%;
+  margin:2px 0 20px 10px;
+}
+
 
 @media screen and (max-width: 900px) {
   #Operations-container {
@@ -87,7 +119,7 @@ div.content {
 
 @media screen and (min-width: 900px) {
   #Operations-container {
-    margin-left: 600px;
+    margin-left: 250px;
   }
 
   #balance{

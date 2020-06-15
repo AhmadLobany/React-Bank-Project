@@ -49,11 +49,11 @@ class Operations extends Component {
     render() {
         return (
             <div id="Operations-container">
-                <input placeholder="Amount" value={this.state.amount} onChange={this.updateAmount}></input>
-                <input placeholder="Vendor" value={this.state.vendor} onChange={this.updateVendor}></input>
-                <input placeholder="Category" value={this.state.Category} onChange={this.updateCategory}></input>
-                <button onClick={this.deposit}>Deposit</button>
-                <button onClick={this.withraw}>Withdraw</button>
+                <input placeholder="Amount" className="in" value={this.state.amount} onChange={this.updateAmount}></input>
+                <input placeholder="Vendor" className="in"  value={this.state.vendor} onChange={this.updateVendor}></input>
+                <input placeholder="Category" className="in" value={this.state.Category} onChange={this.updateCategory}></input>
+                <button onClick={this.deposit} className="button">Deposit</button>
+                <button onClick={this.withraw} className="button">Withdraw</button>
 
             </div>
         )
